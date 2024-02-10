@@ -1,0 +1,32 @@
+<nav
+  class="flex justify-between p-[20px] bg-gradient-to-b from-gray-600 to-gray-700 text-white text-md items-center justify-center"
+>
+  <div class="nav-logo text-3xl">
+    <a href="/"
+      ><img class="w-[80px] h-[80px] rounded-full" src="logo.jpeg"
+    /></a>
+  </div>
+  <div class="nav-menu absolute ml-[37%] text-gray-400">
+    <ul class="flex gap-9 font-bold text-2xl">
+      <li class="hover:text-white"><a href="/">Home</a></li>
+      <li class="hover:text-white"><a href="#">Porfolio</a></li>
+      <li class="hover:text-white"><a href="/faq">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="nav-handles">
+    <ul class="flex gap-7 items-center text-xl">
+      <% if (user) { %>
+      <li class="text-gray-400 text-2xl">Welcome, <%= user.email %></li>
+      <li><a href="/logout">Log Out</a></li>
+      <% } else { %>
+        <a
+          href="/login"
+          class="bg-blue-200 rounded-[10px] border border-gray-800 cursor-pointer shadow shadow-gray-900 p-3 px-5 text-black font-bold text-xl hover:bg-yellow-200 hover:gray-500 hover:shadow-gray-900 duration-300"
+          >Log In</a
+        >
+      </li>
+      <li><a href="/signup" class="btn">Sign Up</a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Send Direct Message</title>
+  </head>
+  <body>
+    <%- include('navbar') %>
+    <h2
+      class="message-status w-full text-center text-lg bg-green-300 p-2 opacity-0"
+    ></h2>
+    <form class="flex">
+      <div
+        class="container mx-auto my-[100px] shadow-lg shadow-gray-700 w-[600px] px-5 mb-[50px]"
+      >
+        <h2 class="p-2 text-center text-2xl">Send Message</h2>
+        <label class="block p-2" for="messageHead">Name</label>
+        <input
+          name="messageHead"
+          class="block border w-full p-2 border-black rounded-md"
+          type="text"
+        />
+        <label class="block p-2" for="messageBody">Message</label>
+        <textarea
+          name="messageBody"
+          class="block w-full p-2 mb-[20px] h-[300px] border border-black rounded-lg"
+        ></textarea>
+        <button
+          class="text-xl bg-yellow-200 hover:bg-blue-200 rounded-lg border border-black shadow mb-[50px] w-[100px] text-center justify-center mx-auto p-3"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector("form");
+
+      const messageStatus = document.querySelector(".message-status");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const head = form.messageHead.value;
+        const body = form.messageBody.value;
+
+        const res = await fetch("/send-message", {
+          method: "post",
+          body: JSON.stringify({ head: head, body: body }),
+          headers: { "Content-type": "application/json" },
+        });
+        const data = await res.json();
+        console.log(data.message);
+
+        if (data.message === "sent") {
+          messageStatus.textContent = "Message Sent!";
+          messageStatus.classList.add("opacity-100");
+          messageStatus.classList.remove("bg-red-500");
+          messageStatus.classList.add("bg-green-200");
+
+          form.messageHead.value = "";
+          form.messageBody.value = "";
+        }
+        if (data.message === "Notsent") {
+          messageStatus.textContent = "Message Not Sent!";
+          messageStatus.classList.add("opacity-100");
+          messageStatus.classList.remove("bg-green-200");
+          messageStatus.classList.add("bg-red-500");
+        }
+      });
+    </script>
+
+    <%- include('footer') %>
+  </body>
+</html>

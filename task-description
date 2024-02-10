@@ -1,0 +1,26 @@
+> This is going to be a two page app.
+
+1. Page-1 is going to be details about me
+2. Page-2 is where any user can send me a message - in order to send me a message they must create an account on my page and login to access the "send message" page
+3. Also put a role of admin and user as well. So, any person who registered is a user by default
+However, I can login using my id as admin - This allows me to see recieved message on website
+Other people can only send message 
+
+> structure
+> MVC
+> Model:
+
+- Users
+- Messages
+  View / Routes:
+- Home Page
+- Login / Sign Up
+- Send Message
+- 404 Page Not Found
+  Controllers:
+- Users
+- Messages
+
+Front-End: HTML, CSS, JavaScript, EJS
+Back-End: NodeJS, Express, Bcrypt, JSONWebTokens
+Database: MongoDB, Mongoose
